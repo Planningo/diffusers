@@ -1248,6 +1248,8 @@ class XFormersAttnProcessor:
             batch_size, channel, height, width = hidden_states.shape
             hidden_states = hidden_states.view(batch_size, channel, height * width).transpose(1, 2)
 
+        if(type(encoder_hidden_states) is tuple):
+            encoder_hidden_states = encoder_hidden_states[0]
         batch_size, key_tokens, _ = (
             hidden_states.shape if encoder_hidden_states is None else encoder_hidden_states.shape
         )
